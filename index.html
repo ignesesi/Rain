@@ -1,10 +1,36 @@
 <html>
-	<head><style>body{margin:0;}</style></head>
-	
-	<body>
-		<canvas id="canvas-id" width="800px" height="600px"></canvas>
-		<script src="pro.js">
-		
-		</script>
-	</body>
+    <body>
+        <canvas id="canvas-id" ></canvas>
+    </body>
+    
+    <style>
+        body, html, #canvas-id {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+    </style>
+    
+    <script>
+    	//use strict;
+    	let requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame || function (callback) { setTimeout (callback, 1000 / 30); };
+	let canvas = document.getElementById("canvas-id");
+	/*
+	//TODO: fullscreen
+	let screenSizeX = window.innerWidth, screenSizeY = window.innerHeight;
+	canvas.width = screenSizeX;
+	canvas.height = screenSizeY;
+	*/
+	canvas.width = 514;
+	canvas.height = 514;
+	let context = canvas.getContext("2d");
+    </script>
+    
+    <script src="settings.js"></script>
+    <script src="diamond_square.js"></script>
+    <script src="draw.js"></script>
+    <script src="update.js"></script>
+    <script src="events.js"></script>
+    
+    <script src="game.js"></script>
 </html>
