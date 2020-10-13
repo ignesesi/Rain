@@ -1,19 +1,20 @@
+
 function onKeyUp(args)
 {     
     if(args.keyCode == 32) {
-        if(risuvamBurq) {
-            for(let y = 0; y < n; y++) {
-                for(let x = 0; x < n; x++) {
-                    if(distance(x, y, burqX, burqY) <= razmerBurq) {
-                        vali[x][y] += 10;
+        if(isRainAnimating) {
+            for(let y = 0; y < gridSize; y++) {
+                for(let x = 0; x < gridSize; x++) {
+                    if(distance(x, y, rainStartX, rainStartY) <= rainRadius) {
+                        waterLevel[x][y] += 10;
                     }
                 }
             }
-            risuvamBurq = false;
+            isRainAnimating = false;
         } else {
-            burqX = undefined;
-            burqY = undefined;
-            risuvamBurq = true;
+            rainStartX = undefined;
+            rainStartY = undefined;
+            isRainAnimating = true;
         }
     }
 }
@@ -22,8 +23,8 @@ function onMouseMove(args)
 {
     let mouseX = args.clientX - canvas.offsetLeft;
     let mouseY = args.clientY - canvas.offsetTop;
-    if(risuvamBurq) {
-        razmerBurq = distance(burqX, burqY, Math.floor(mouseX/razmerX), Math.floor(mouseY/razmerY));
+    if(isRainAnimating) {
+        rainRadius = distance(rainStartX, rainStartY, Math.floor(mouseX/cellSizeX), Math.floor(mouseY/cellSizeY));
     }
 }
 
@@ -31,19 +32,19 @@ function onMouseUp(args)
 {
     let mouseX = args.clientX - canvas.offsetLeft;
     let mouseY = args.clientY - canvas.offsetTop;
-    if(risuvamBurq) {
-        for(let y = 0; y < n; y++) {
-            for(let x = 0; x<n; x++) {
-                if(distance(x, y, burqX, burqY) <= razmerBurq) {
-                    vali[x][y] += 10;
+    if(isRainAnimating) {
+        for(let y = 0; y < gridSize; y++) {
+            for(let x = 0; x < gridSize; x++) {
+                if(distance(x, y, rainStartX, rainStartY) <= rainRadius) {
+                    waterLevel[x][y] += 10;
                 }
             }
         }
-        risuvamBurq = false;
+        isRainAnimating = false;
     } else {
-        burqX = undefined;
-        burqY = undefined;
-        risuvamBurq = true;
+        rainStartX = undefined;
+        rainStartY = undefined;
+        isRainAnimating = true;
     }
 }
 
@@ -51,7 +52,7 @@ function onMouseDown(args)
 {
     let mouseX = args.clientX - canvas.offsetLeft;
     let mouseY = args.clientY - canvas.offsetTop;
-    burqX = Math.floor(mouseX/razmerX);
-    burqY = Math.floor(mouseY/razmerY);
-    risuvamBurq = true;
+    rainStartX = Math.floor(mouseX/cellSizeX);
+    rainStartY = Math.floor(mouseY/cellSizeY);
+    isRainAnimating = true;
 }

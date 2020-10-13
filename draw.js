@@ -2,39 +2,32 @@
 function draw()
 {
     context.clearRect(0, 0, canvas.width, canvas.height);
-    
-    for(let x = 0; x < golemina; x++) {
-        for(let y = 0; y < golemina; y++) {
-            let current = tablica[x][y];
-            for(let i in colors) {
-                if(colors[i].level > current) {
-                    pole[x][y] = colors[i].level;
-                    context.fillStyle = colors[i].color;
-                    break;
-                }
-            }
-            context.globalAlpha = 1;
-            context.fillRect(x*razmerX, y*razmerY, razmerX, razmerY);
+
+    context.globalAlpha = 1;
+    for(let x = 0; x < gridSize; x++) {
+        for(let y = 0; y < gridSize; y++) {
+            context.fillStyle = gridColor[x][y];
+            context.fillRect(x*cellSizeX, y*cellSizeY, cellSizeX, cellSizeY);
         }
     }
-    
-    for(let y = 0; y < n; y++) {
-        for(let x = 0; x < n; x++) {
-            if(risuvamBurq) {
-                if(distance(x, y, burqX, burqY) <= razmerBurq) {
+
+    for(let y = 0; y < gridSize; y++) {
+        for(let x = 0; x < gridSize; x++) {
+            if(isRainAnimating) {
+                if(distance(x, y, rainStartX, rainStartY) <= rainRadius) {
                     context.globalAlpha = 0.6;
                     context.fillStyle = "red";
-                    context.fillRect(x*razmerX, y*razmerY,razmerX,razmerY);
+                    context.fillRect(x*cellSizeX, y*cellSizeY,cellSizeX,cellSizeY);
                 }
             }
-            if(vali[x][y] > 0) {
-                context.globalAlpha = waterDepth[convertToIndex(vali[x][y])];
+            if(waterLevel[x][y] > 0) {
+                context.globalAlpha = waterAlpha[convertToIndex(waterLevel[x][y])];
                 context.fillStyle = "#0000FF";
-                context.fillRect(x*razmerX, y*razmerY,razmerX,razmerY);
+                context.fillRect(x*cellSizeX, y*cellSizeY,cellSizeX,cellSizeY);
             }
         }
     }
-    
+
     requestAnimationFrame(draw);
 }
 
