@@ -56,3 +56,4 @@ function onMouseDown(args)
     rainStartY = Math.floor(mouseY/cellSizeY);
     isRainAnimating = true;
 }
+

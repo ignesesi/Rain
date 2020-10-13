@@ -29,30 +29,32 @@ function draw()
     }
 
     requestAnimationFrame(draw);
+
+    function convertToIndex(v) {
+        if(v<10) {
+            return 0;
+        }
+        if(v>=10 && v<20) {
+            return 1;
+        }
+        if(v>=20 && v<40) {
+            return 2;
+        }
+        if(v>=40 && v<60) {
+            return 3;
+        }
+        if(v>=60 && v<80) {
+            return 4;
+        }
+        if(v>=80 && v<100) {
+            return 5;
+        }
+        if(v>=100 && v<130) {
+            return 6;
+        }
+        return 7;
+    }
 }
 
-function convertToIndex(v) {
-    if(v<10) {
-        return 0;
-    }
-    if(v>=10 && v<20) {
-        return 1;
-    }
-    if(v>=20 && v<40) {
-        return 2;
-    }
-    if(v>=40 && v<60) {
-        return 3;
-    }
-    if(v>=60 && v<80) {
-        return 4;
-    }
-    if(v>=80 && v<100) {
-        return 5;
-    }
-    if(v>=100 && v<130) {
-        return 6;
-    }
-    return 7;
-}
+
 
